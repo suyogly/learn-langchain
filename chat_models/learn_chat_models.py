@@ -15,7 +15,7 @@ llm = ChatGoogleGenerativeAI(
 result = llm.invoke("tell me about Nepal.")
 
 # this prints all the result from answers to token consumptions
-print(result)
+# print(result)
 
 # this prints only the response
 print(result.content)
