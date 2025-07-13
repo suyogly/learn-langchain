@@ -2,6 +2,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from dotenv import load_dotenv
 
+# basically, i didnt call the load_dotenv here but it worked, because of the python file system, it is global in all the files inside of the project.
+
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",
     max_tokens=None
