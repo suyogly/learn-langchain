@@ -10,10 +10,12 @@ llm = ChatGroq(
 )
 
 names_template = ChatPromptTemplate.from_messages([
-    ("system", "generate the random multi-national names of boys and girls."),
+    ("system", "generate the random multi-national non equal number names of boys and girls."),
 
     ("human", "generate {number} of the names.")
 ])
+
+print(names_template)
 
 classify_boys_and_girls = ChatPromptTemplate.from_messages([
     ("system", "from the passed message you need to classify which names are of boys and which names are of boys with their probable nationality."),
@@ -21,6 +23,7 @@ classify_boys_and_girls = ChatPromptTemplate.from_messages([
     ("human", "from the names, classify {names}")
 ])
 
+print(classify_boys_and_girls)
 
 def classify_names(ai_message):
     return {"names:", ai_message.content}
@@ -29,7 +32,7 @@ def classify_names(ai_message):
 count = ChatPromptTemplate.from_messages([
     ("system", "count the number of boys and girls from the messages"),
 
-    ("human", "count the number of boys and girls {gender_count}")
+    ("human", "count the number of boys and girls {gendercount}")
 ])
 
 
@@ -38,6 +41,7 @@ def count_gender(ai_message):
 
 
 chain = names_template | llm | RunnableLambda(classify_names) | classify_boys_and_girls | llm | RunnableLambda(count_gender) | count | llm
+print(chain)
 
 result = chain.invoke({
     "number" : 50
