@@ -11,10 +11,11 @@ llm = ChatGroq(
     max_tokens=None
 )
 
-csv = CSVLoader.load("files/hello.csv")
+csv = CSVLoader(file_path="files/hello.csv")
 
 csv_content = csv.load()
-print(csv_content)
+
+print(len(csv_content))
 
 print("\n ----- \n")
 
