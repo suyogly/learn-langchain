@@ -29,3 +29,4 @@ chain = prompt1 | llm1 | parser
 
 result = chain.invoke({"text" : text_content})
 print(result)
+
