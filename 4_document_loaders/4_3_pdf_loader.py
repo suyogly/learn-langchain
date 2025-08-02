@@ -29,3 +29,10 @@ result = chain.invoke({
 })
 
 print(result)
+
+'''
+But what about unstructured pdf? 
+
+we can use unstructuredpdfloader package, or can use text extractors like amazon textract
+
+'''
