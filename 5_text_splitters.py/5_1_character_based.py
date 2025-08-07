@@ -11,8 +11,8 @@ doc3_content = doc3.load()
 
 splitter = CharacterTextSplitter(
     chunk_size=50, # chunk with how many characters?
-    chunk_overlap=0, # 
-    separator='' # 
+    chunk_overlap=0, # from the last chunk to present chunk, how many of the chunk will overlap?
+    separator=''
 )
 
 split1 = splitter.split_documents(documents=doc1_content)
