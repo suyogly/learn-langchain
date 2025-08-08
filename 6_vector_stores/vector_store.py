@@ -38,4 +38,11 @@ vector_store = Chroma(
 
 vector_store.add_documents(docs)
 
-vector_store.get(include=['embeddings','documents', 'metadatas'])
+# print(vector_store.get(include=['embeddings','documents', 'metadatas']))
+
+similarity = vector_store.similarity_search(
+    query='who is the primeminister of nepal',
+    k=2
+)
+
+print(similarity)
