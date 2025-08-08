@@ -10,4 +10,4 @@ streamlit
 
 bs4
 
-chroma
+Chroma
