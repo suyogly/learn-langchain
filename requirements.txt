@@ -9,3 +9,5 @@ python-dotenv
 streamlit
 
 bs4
+
+chroma
