@@ -1,0 +1,2 @@
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_core.vectorstores import Chroma
