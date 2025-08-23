@@ -11,3 +11,5 @@ streamlit
 bs4
 
 chromadb
+
+rank_bm25
