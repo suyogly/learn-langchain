@@ -5,6 +5,8 @@ langchain-google-genai
 langchain-groq
 google-generativeai
 
+langchain-chroma
+
 python-dotenv
 streamlit
 
