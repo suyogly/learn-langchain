@@ -1,3 +1,4 @@
 *.env
 *.venv
 *my_db/
+*new_db/

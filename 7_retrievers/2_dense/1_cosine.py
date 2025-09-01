@@ -28,5 +28,9 @@ vector = Chroma(
     collection_name="dense"
 )
 
-print(vector.add_documents(chunks))
+vector.add_documents(chunks)
+
+similarity = vector.max_marginal_relevance_search()
+
+
 
