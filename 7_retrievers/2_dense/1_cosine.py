@@ -5,32 +5,67 @@ from langchain_chroma import Chroma
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+from langchain.schema.runnable import RunnablePassthrough
 from dotenv import load_dotenv
 
 load_dotenv()
 
-file = PyPDFLoader(file_path="files/Reality transurfing Steps I-V - PDF Room.pdf")
-content = file.load()
+loader = PyPDFLoader(file_path="files/jim-collins-beyond-entrepreneurship.pdf")
+
+content = loader.load()
+
 # print(content)
 
 splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
-    chunk_overlap = 250
+    chunk_overlap = 270
 )
 
-chunks = splitter.split_documents(content)
+splitted_content = splitter.split_documents(content)
 
-embed = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+# print(splitted_content)
 
-vector = Chroma(
-    embedding_function=embed,
-    persist_directory="new_db",
+vector_db = Chroma(
+    embedding_function=GoogleGenerativeAIEmbeddings(model="models/embedding-001"),
     collection_name="dense"
 )
 
-vector.add_documents(chunks)
+vectors = vector_db.add_documents(splitted_content)
+# print(vectors)
 
-similarity = vector.max_marginal_relevance_search()
+retriever = vector_db.as_retriever(search_kwargs={"k": 4})
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    max_tokens=None
+)
+
+parser = StrOutputParser()
+
+prompt = ChatPromptTemplate.from_template("""
+Answer the question based on the following context:
+
+Context: {context}
+
+Question: {question}
+
+Answer:
+""")
+
+def join_doc(docs):
+    return "\n\n".join([doc.page_content for doc in docs])
 
 
+chain = (
+    {
+        "context": retriever | join_doc,
+        "question": RunnablePassthrough()
+    }
+    | prompt
+    | llm
+    | parser
+)
 
+result = chain.invoke("what is the essence of this book? in an utmost detail")
+
+print(result)
