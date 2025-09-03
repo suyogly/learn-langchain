@@ -33,7 +33,10 @@ vector_db = Chroma(
 vectors = vector_db.add_documents(splitted_content)
 # print(vectors)
 
-retriever = vector_db.as_retriever(search_kwargs={"k": 4})
+retriever = vector_db.as_retriever(
+    search_type = "similarity",
+    search_kwargs={"k": 4}
+)
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
