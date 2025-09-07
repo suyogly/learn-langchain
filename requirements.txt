@@ -17,3 +17,4 @@ chromadb
 rank_bm25
 
 duckduckgo-search
+ddgs
