@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-loader = PyPDFLoader(file_path="files/jim-collins-beyond-entrepreneurship.pdf")
+loader = PyPDFLoader(file_path="files/Reality transurfing Steps I-V - PDF Room.pdf")
 
 content = loader.load()
 
